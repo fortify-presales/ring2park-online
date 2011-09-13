@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<input name="username" />
+	<input name="verificationCode" />	
+		
+	<!-- is this a new registration or a verification? -->
+	<decision-state id="verificationCheck">
+        <if test="verificationCode == null" then="registration" else="verification" />
+	</decision-state>
+		
+	<!-- start registration process by creating an empty user -->
+	<action-state id="registration">
+		<evaluate expression="userActions.createUser" result="flowScope.user" />
+		<transition on="success" to="enterDetails" />
+		<transition on="error" to="error" />
+	</action-state>
+    
+	<view-state id="enterDetails" model="user" view="registerDetails">
+		<binder>
+			<binding property="username" required="true" />
+			<binding property="name" required="true" />
+			<binding property="password" required="true" />
+			<binding property="confirmPassword" required="true" />
+			<binding property="email" required="true" />
+			<binding property="mobile" required="true" />
+		</binder>
+		<transition on="next" to="validateUser" />
+	</view-state>
+	
+	<action-state id="validateUser">
+		<evaluate expression="userActions.validateUser" result="flowScope.userResult" />
+        <transition on="success" to="displayTerms" />
+        <transition on="invalid" to="enterDetails" />
+    </action-state>
+    
+    <view-state id="displayTerms" model="user" view="registerTerms">
+    	<binder>
+    		<binding property="acceptTerms" required="true" />
+    	</binder>
+    	<transition on="back" to="enterDetails" />
+    	<transition on="register" to="validateTerms" />
+    </view-state> 
+    
+    <action-state id="validateTerms">
+    	<evaluate expression="userActions.validateTerms" result="flowScope.termsResult" />
+    	<transition on="accept" to="registerSuccess" />
+    	<transition on="reject" to="displayTerms" />
+    </action-state>
+    
+    <!-- start verification process -->
+	<action-state id="verification">
+		<evaluate expression="userActions.verifyUser" result="flowScope.user" />
+		<transition on="success" to="verificationSuccess" />
+		<transition on="error" to="error" />
+	</action-state>
+    
+    <end-state id="registerSuccess"  
+    	view="registerSuccess" />
+    	
+    <end-state id="verificationSuccess"
+    	view="registerVerified" />
+    
+    <end-state id="cancel" 
+		view="externalRedirect:contextRelative:/"/>
+
+    <end-state id="error" 
+		view="registerError"/>		
+
+</flow>

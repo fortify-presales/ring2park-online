@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+	
+<tiles-definitions>
+	
+	<definition name="bookingVehicle" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/booking/bookingVehicle.jsp"/>
+	</definition>
+	
+	<definition name="bookingDetails" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/booking/bookingDetails.jsp"/>
+	</definition>
+	
+	<definition name="bookingPayment" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/booking/bookingPayment.jsp"/>
+	</definition>
+	
+	<definition name="bookingReview" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/booking/bookingReview.jsp" />
+	</definition>
+	
+	<definition name="bookingConfirmation" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/booking/bookingConfirmation.jsp" />
+	</definition>
+	
+	<definition name="bookingError" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/booking/bookingError.jsp" />
+	</definition>
+	
+</tiles-definitions>

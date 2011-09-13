@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+		
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+
+	<!-- Configures the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- resources mapping="/resources/**" location="/resources/" /-->
+	
+	<!-- Configures a handler for serving static resources by forwarding to the Servlet container's default Servlet. -->
+	<default-servlet-handler />
+	
+	<!-- Maps view names to Tiles Definitions with support for partial re-rendering -->
+	<beans:bean id="viewResolver" class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">
+		<beans:property name="viewClass" value="org.springframework.webflow.mvc.view.FlowAjaxTilesView"/>
+	</beans:bean>
+		
+	<!-- Initializes the Apache Tiles CompositeView system -->
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:value>
+				/WEB-INF/**/tiles.xml
+			</beans:value>
+		</beans:property>
+	</beans:bean>
+
+	<!-- Initialize validator -->
+	<beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+	
+	<!-- Used in webflows -->
+    <beans:bean id="vehicleBean" class="com.dps.ring2park.domain.Vehicle" scope="prototype" />
+    <beans:bean id="cardBean" class="com.dps.ring2park.domain.PaymentCard" scope="prototype" />
+    <beans:bean id="userBean" class="com.dps.ring2park.domain.User" scope="prototype" />
+    
+	<!-- Configures Spring Web FLow -->
+	<beans:import resource="webflow.xml" />
+	
+	<!-- Configures transaction management around @Transactional components -->
+	<tx:annotation-driven />
+
+	<!-- Imports the application controllers that process client requests -->
+	<beans:import resource="controllers.xml" />
+	
+	<beans:bean id="messageTemplate" class="org.springframework.mail.SimpleMailMessage">
+		<beans:property name="subject" value="Registration Confirmation" />
+	</beans:bean>
+
+	<beans:bean id="userService" class="com.dps.ring2park.service.impl.UserServiceImpl">
+		<beans:property name="mailSender">
+			<beans:ref bean="mailSender" />
+		</beans:property>
+		<beans:property name="messageTemplate">
+			<beans:ref bean="messageTemplate" />
+		</beans:property>
+	</beans:bean>
+
+</beans:beans>

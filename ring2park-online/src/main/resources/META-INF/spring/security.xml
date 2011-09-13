@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<http use-expressions="true">
+		<!-- Authentication policy -->
+		<intercept-url pattern="/**" filters="none" />
+		<intercept-url pattern="/vehicles/**" access="isAuthenticated()" />
+		<intercept-url pattern="/cards/**" access="isAuthenticated()" />
+		<intercept-url pattern="/statements/**" access="isAuthenticated()" />
+		<intercept-url pattern="/users/**" access="isAuthenticated()" />
+		<intercept-url pattern="/account" access="isAuthenticated()" />
+		<form-login login-page="/login" login-processing-url="/login/authenticate"
+			default-target-url="/account" authentication-failure-url="/login?login_error=1" />
+		<logout logout-url="/logout" logout-success-url="/" />
+		<access-denied-handler error-page="/accessDenied"/>		
+	</http>
+
+	<beans:bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" />
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="jdbcUserService">
+			<password-encoder ref="passwordEncoder" />
+		</authentication-provider>
+	</authentication-manager>
+
+	<jdbc-user-service id="jdbcUserService" data-source-ref="dataSource"
+		users-by-username-query="select username, password, enabled from user where username = ?"
+		authorities-by-username-query="select user_username, roles_authority from user_role where user_username = ?" />
+
+</beans:beans>

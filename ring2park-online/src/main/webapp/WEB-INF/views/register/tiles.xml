@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+	
+<tiles-definitions>
+	
+	<definition name="registerDetails" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/register/registerDetails.jsp"/>
+	</definition>
+	
+	<definition name="registerTerms" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/register/registerTerms.jsp"/>
+	</definition>
+	
+	<definition name="registerSuccess" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/register/registerSuccess.jsp"/>
+	</definition>
+	
+	<definition name="registerVerified" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/register/registerVerified.jsp"/>
+	</definition>
+	
+	<definition name="registerError" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/register/registerError.jsp"/>
+	</definition>	
+	
+</tiles-definitions>

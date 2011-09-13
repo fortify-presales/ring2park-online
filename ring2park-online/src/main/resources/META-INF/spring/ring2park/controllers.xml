@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd		
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources -->
+	<mvc:resources location="/, classpath:/META-INF/web-resources/"
+		mapping="/resources/**" />
+
+	<!-- selects a static view for rendering without the need for an explicit 
+		controller -->
+	<mvc:view-controller path="/" view-name="home" />
+	<mvc:view-controller path="/login" />
+	<mvc:view-controller path="/logout" />
+	<mvc:view-controller path="/about" />
+	<mvc:view-controller path="/help" />
+	<mvc:view-controller path="/account" />
+	<mvc:view-controller path="/accessDenied" />
+	<mvc:view-controller path="/uncaughtException" />
+	<mvc:view-controller path="/resourceNotFound" />
+	<mvc:view-controller path="/dataAccessFailure" />
+
+	<!-- sets default locale and message sources -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="WEB-INF/i18n/messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="lang" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+
+	<bean id="handlerMapping"
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<ref bean="localeChangeInterceptor" />
+		</property>
+	</bean>
+
+	<!-- Handlers for executions of the webflows -->
+	<bean name="ring2park/booking" class="com.dps.ring2park.web.BookingFlowHandler" />
+	<bean name="ring2park/register" class="com.dps.ring2park.web.RegisterFlowHandler" />
+
+	<!-- Scans for annotated @Controllers in the classpath -->
+	<context:component-scan base-package="com.dps.ring2park" />
+
+</beans>
