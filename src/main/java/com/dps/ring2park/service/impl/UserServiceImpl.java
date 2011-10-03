@@ -149,7 +149,7 @@ public class UserServiceImpl implements UserService {
 		message.setText(user.getName()
 				+ ",\n\n"
 				+ "Thank you for your registration at Ring2Park, please click on the link below to complete the registration process:\n\n"
-				+ "http://ring2park.clooudfoundry.com/" + contextPath + "?username="
+				+ "http://ring2park.cloudfoundry.com/register?username="
 				+ user.getUsername() + "&verificationCode=" + user.getVerifyCode() + "\n\n"
 				+ "If the link does not work, then please and copy and paste the complete line into your browsers URL field.\n\n" 
 				+ "Ring2Park Online");
