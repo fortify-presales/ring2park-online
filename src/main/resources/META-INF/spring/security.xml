@@ -7,7 +7,10 @@
 
 	<http use-expressions="true">
 		<!-- Authentication policy -->
-		<intercept-url pattern="/**" filters="none" />
+		<intercept-url pattern="/" access="permitAll"/>
+        <intercept-url pattern="/resources/**" filters="none" />
+        <intercept-url pattern="/styles/**" filters="none" />
+        <intercept-url pattern="/styles/PIE.htc" filters="none" />
 		<intercept-url pattern="/vehicles/**" access="isAuthenticated()" />
 		<intercept-url pattern="/cards/**" access="isAuthenticated()" />
 		<intercept-url pattern="/statements/**" access="isAuthenticated()" />

@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-	public boolean notifyNewUser(User user) {
+	public boolean notifyNewUser(User user, String contextPath) {
 		this.addUser(user);
 		SimpleMailMessage message = new SimpleMailMessage(this.messageTemplate);
 		message.setFrom("registration@ring2park.com");
@@ -149,7 +149,7 @@ public class UserServiceImpl implements UserService {
 		message.setText(user.getName()
 				+ ",\n\n"
 				+ "Thank you for your registration at Ring2Park, please click on the link below to complete the registration process:\n\n"
-				+ "http://localhost:8080/ring2park/register?username="
+				+ "http://ring2park.clooudfoundry.com/" + contextPath + "?username="
 				+ user.getUsername() + "&verificationCode=" + user.getVerifyCode() + "\n\n"
 				+ "If the link does not work, then please and copy and paste the complete line into your browsers URL field.\n\n" 
 				+ "Ring2Park Online");

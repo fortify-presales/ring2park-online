@@ -5,7 +5,7 @@
 
 	<input name="username" />
 	<input name="verificationCode" />	
-		
+	
 	<!-- is this a new registration or a verification? -->
 	<decision-state id="verificationCheck">
         <if test="verificationCode == null" then="registration" else="verification" />

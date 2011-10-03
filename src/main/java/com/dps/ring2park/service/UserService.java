@@ -97,9 +97,10 @@ public interface UserService {
     /**
      * Notifies a new user of their registration.
      * @param user the user
+     * @param contextPath root context for links
      * @return true if email is sent else false
      */
-    public boolean notifyNewUser(User user);
+    public boolean notifyNewUser(User user, String contextPath);
   
     /**
      * Verifies a new user's registration.

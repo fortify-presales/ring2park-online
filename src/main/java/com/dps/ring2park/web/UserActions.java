@@ -57,7 +57,8 @@ public class UserActions extends MultiAction {
 	
 	public Event validateTerms(RequestContext context) {
 		Event event = null;
-        User user = (User)context.getFlowScope().get("user");         
+        User user = (User)context.getFlowScope().get("user");   
+        String contextPath = (String)context.getExternalContext().getContextPath(); 
       
         if (!user.getAcceptTerms()) {
         	context.getMessageContext().addMessage(new MessageBuilder().code("error_acceptterms").error()
@@ -65,7 +66,7 @@ public class UserActions extends MultiAction {
         	event = new Event(this, "reject");
         } else {
         	userService.updateUser(user);
-        	userService.notifyNewUser(user);
+        	userService.notifyNewUser(user, contextPath);
         	event = new Event(this, "accept");
         }
         
