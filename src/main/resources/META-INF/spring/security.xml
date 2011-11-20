@@ -6,16 +6,6 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
 	<http use-expressions="true">
-		<!-- Authentication policy -->
-		<intercept-url pattern="/" access="permitAll"/>
-        <intercept-url pattern="/resources/**" filters="none" />
-        <intercept-url pattern="/styles/**" filters="none" />
-        <intercept-url pattern="/styles/PIE.htc" filters="none" />
-		<intercept-url pattern="/vehicles/**" access="isAuthenticated()" />
-		<intercept-url pattern="/cards/**" access="isAuthenticated()" />
-		<intercept-url pattern="/statements/**" access="isAuthenticated()" />
-		<intercept-url pattern="/users/**" access="isAuthenticated()" />
-		<intercept-url pattern="/account" access="isAuthenticated()" />
 		<form-login login-page="/login" login-processing-url="/login/authenticate"
 			default-target-url="/account" authentication-failure-url="/login?login_error=1" />
 		<logout logout-url="/logout" logout-success-url="/" />
