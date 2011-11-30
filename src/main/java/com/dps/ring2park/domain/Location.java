@@ -47,7 +47,7 @@ public class Location implements Serializable {
 	private String country;
 	
 	@NumberFormat(style=Style.CURRENCY)
-	@Column(precision = 2, scale = 2)
+	@Column(precision = 4, scale = 2)
 	private BigDecimal price;
 	
 	@Size(max = 3)
