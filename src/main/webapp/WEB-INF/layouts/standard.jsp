@@ -19,21 +19,19 @@
 <spring:url value="/resources/images/favicon.ico" var="favicon" />
 
 <link rel="stylesheet" type="text/css" href="${claro_url}" />
-<link rel="stylesheet" type="text/css" href="${blueprint_url}screen.css" 
+<link rel="stylesheet" type="text/css" href="/ring2park/styles/blueprint/screen.css" 
 	media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="${blueprint_url}plugins/buttons/screen.css"
+<link rel="stylesheet" type="text/css" href="/ring2park/styles/blueprint/plugins/buttons/screen.css"
 	media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="${blueprint_url}plugins/link-icons/screen.css"
+<link rel="stylesheet" type="text/css" href="/ring2park/styles/blueprint/plugins/link-icons/screen.css"
 	media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="${blueprint_url}print.css"
+<link rel="stylesheet" type="text/css" href="/ring2park/styles/blueprint/print.css"
 	media="print" />
-<link rel="stylesheet" type="text/css" href="${ring2park_url}"
+<link rel="stylesheet" type="text/css" href="/ring2park/styles/ring2park.css"
 	media="screen, projection" />
 <!--[if lt IE 8]>
 	<link rel="stylesheet" type="text/css" href="${blueprint_url}ie.css" media="screen, projection"/>
 <![endif]-->
-<link rel="stylesheet" type="text/css" href="${blueprint_url}print.css"
-	media="print" />
 <link rel="SHORTCUT ICON" href="${favicon}" />
 
 <script src="${dojo_url}" type="text/javascript"></script>
