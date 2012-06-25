@@ -27,7 +27,7 @@
 			<div>
 				<div class="span-14 last">
 					<p>Thank you for your booking at ${booking.location.name}, 
-						your confirmation number is <em>${booking.getFormattedId()}</em></p>
+						your confirmation number is <em>${booking.formattedId}</em></p>
 				</div>
 			</div>
 			<div>

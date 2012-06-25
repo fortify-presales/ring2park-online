@@ -60,6 +60,8 @@ public class Booking implements Serializable {
 	private boolean confirmation;
 
 	private boolean reminder;
+	
+	public String formattedId;
 
 	public Booking() {
 		Calendar calendar = Calendar.getInstance();
@@ -110,6 +112,7 @@ public class Booking implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+		this.formattedId = String.format("PC%08d", this.id);
 	}
 	
 	public String getFormattedId() {

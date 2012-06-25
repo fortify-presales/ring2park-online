@@ -28,7 +28,7 @@
 				<tbody>
 					<c:forEach var="booking" items="${bookingList}">
 						<tr>
-							<td>${booking.getFormattedId()}</td>
+							<td>${booking.formattedId}</td>
 							<td>${booking.location.name}</td>
 							<td>${booking.location.address}</td>
 							<td>${booking.location.city}, ${booking.location.state}</td>
