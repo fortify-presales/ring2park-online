@@ -6,7 +6,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
-        <property name="context-root" value="ring2park"/>
         <property name="java-output-path" value="/ring2park/target/classes"/>
+        <property name="context-root" value="ring2park"/>
     </wb-module>
 </project-modules>
