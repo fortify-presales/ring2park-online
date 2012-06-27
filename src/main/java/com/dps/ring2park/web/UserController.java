@@ -17,8 +17,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dps.ring2park.domain.User;
+import com.dps.ring2park.security.LoginStatus;
 import com.dps.ring2park.service.UserService;
 import com.dps.ring2park.web.extensions.FlashMap;
 
@@ -50,14 +53,16 @@ public class UserController {
 			return "users/invalidUser";
 		}
 		model.addAttribute(user);
-		if (SecurityContextHolder.getContext().getAuthentication().getName().equals(username))
+		if (SecurityContextHolder.getContext().getAuthentication().getName()
+				.equals(username))
 			editable = true;
-		Collection<GrantedAuthority> authorities =  SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		Collection<GrantedAuthority> authorities = SecurityContextHolder
+				.getContext().getAuthentication().getAuthorities();
 		for (GrantedAuthority grantedAuthority : authorities) {
-			if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) { 
+			if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
 				editable = true;
 			}
-		}     
+		}
 		model.addAttribute("editable", editable);
 		return "users/view";
 	}
@@ -97,13 +102,14 @@ public class UserController {
 		model.addAttribute(new User());
 		return "users/add";
 	}
-	
+
 	// REST style action URIs
 
 	// update a user
 	@PreAuthorize("#user.username == authentication.name or hasRole('ROLE_ADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
-	public String update(@Valid User user, BindingResult bindingResult, Model model) {
+	public String update(@Valid User user, BindingResult bindingResult,
+			Model model) {
 		if (bindingResult.hasErrors()) {
 			return "users/edit";
 		}
@@ -134,6 +140,14 @@ public class UserController {
 		String message = "Succesfully deleted user " + username + ".";
 		FlashMap.setSuccessMessage(message);
 		return "redirect:../users/";
+	}
+
+	// login a user via AJAX
+	@RequestMapping(value = "/login.json", method = RequestMethod.POST, headers="Accept=application/json")
+	public @ResponseBody LoginStatus login(@RequestParam("j_username") String username,
+			@RequestParam("j_password") String password) {
+
+		return userService.login(username, password);
 	}
 
 }

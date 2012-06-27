@@ -21,6 +21,7 @@ import com.dps.ring2park.dao.RoleDao;
 import com.dps.ring2park.dao.UserDao;
 import com.dps.ring2park.domain.Role;
 import com.dps.ring2park.domain.User;
+import com.dps.ring2park.security.LoginStatus;
 import com.dps.ring2park.service.UserService;
 
 /**
@@ -111,9 +112,9 @@ public class UserServiceImpl implements UserService {
 		oldPassword = (oldUser == null) ? "" : oldUser.getPassword();
 		if (!user.getPassword().equals(oldPassword)) {
 			String encodedPassword = passwordEncoder.encodePassword(
-				user.getPassword(), null);
+					user.getPassword(), null);
 			user.setPassword(encodedPassword);
-		}	
+		}
 		// TODO: hack to make sure user has a role
 		if (user.getRoles().size() == 0) {
 			Set<Role> roles = new HashSet<Role>();
@@ -150,8 +151,11 @@ public class UserServiceImpl implements UserService {
 				+ ",\n\n"
 				+ "Thank you for your registration at Ring2Park, please click on the link below to complete the registration process:\n\n"
 				+ "http://ring2park.cloudfoundry.com/register?username="
-				+ user.getUsername() + "&verificationCode=" + user.getVerifyCode() + "\n\n"
-				+ "If the link does not work, then please and copy and paste the complete line into your browsers URL field.\n\n" 
+				+ user.getUsername()
+				+ "&verificationCode="
+				+ user.getVerifyCode()
+				+ "\n\n"
+				+ "If the link does not work, then please and copy and paste the complete line into your browsers URL field.\n\n"
 				+ "Ring2Park Online");
 		try {
 			mailSender.send(message);
@@ -185,6 +189,18 @@ public class UserServiceImpl implements UserService {
 		} catch (BadCredentialsException e) {
 			// log the message and go on…
 			System.err.println(e.getMessage());
+		}
+	}
+
+	public LoginStatus login(String username, String password) {
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+				username, password);
+		try {
+			Authentication auth = authenticationManager.authenticate(token);
+			SecurityContextHolder.getContext().setAuthentication(auth);
+			return new LoginStatus(auth.isAuthenticated(), auth.getName(), "success");
+		} catch (BadCredentialsException e) {
+			return new LoginStatus(false, null, "invalid credentials");
 		}
 	}
 

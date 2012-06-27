@@ -39,6 +39,15 @@
 <script src="${spring_dojo_url}" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript">
 	dojo.require("dojo.parser");
+	// get some data, convert to JSON
+	dojo.xhrGet({
+	    url:"/login.json",
+	    handleAs:"json",
+	    load: function(data){
+	        for(var i in data){
+	           console.log("key", i, "value", data[i]);
+	        }
+	    }
 </script>
 
 </head>

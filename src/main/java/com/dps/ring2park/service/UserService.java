@@ -6,6 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dps.ring2park.domain.User;
+import com.dps.ring2park.security.LoginStatus;
 
 /**
  * A service interface for updating and retrieving users from a backing repository. 
@@ -116,6 +117,14 @@ public interface UserService {
      * @param user the User
      */
     public void authenticateUser(User user);
+    
+    /**
+     * Logs a user in
+     * @param username
+     * @param password
+     * @return
+     */
+    public LoginStatus login(String username, String password);
 
 }
 
