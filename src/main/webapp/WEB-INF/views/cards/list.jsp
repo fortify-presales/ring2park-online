@@ -20,7 +20,7 @@
 						<spring:param name="id" value="${paymentCard.id}"/>
 					</spring:url>
 					<span class="">
-						<a class="positive"	href="${cardUrl}">${paymentcard.type.toString()}&nbsp;${paymentcard.number}</a> 
+						<a class="positive"	href="${cardUrl}">${paymentcard.type}&nbsp;${paymentcard.number}</a> 
 					</span>
 					<c:if test="${paymentcard.preferred}">&nbsp;(Preferred)</c:if>
 				</div>
