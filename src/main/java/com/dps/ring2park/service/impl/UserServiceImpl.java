@@ -21,7 +21,6 @@ import com.dps.ring2park.dao.RoleDao;
 import com.dps.ring2park.dao.UserDao;
 import com.dps.ring2park.domain.Role;
 import com.dps.ring2park.domain.User;
-import com.dps.ring2park.security.LoginStatus;
 import com.dps.ring2park.service.UserService;
 
 /**
@@ -187,20 +186,8 @@ public class UserServiceImpl implements UserService {
 			Authentication auth = authenticationManager.authenticate(token);
 			SecurityContextHolder.getContext().setAuthentication(auth);
 		} catch (BadCredentialsException e) {
-			// log the message and go on…
+			// log the message and go on
 			System.err.println(e.getMessage());
-		}
-	}
-
-	public LoginStatus login(String username, String password) {
-		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-				username, password);
-		try {
-			Authentication auth = authenticationManager.authenticate(token);
-			SecurityContextHolder.getContext().setAuthentication(auth);
-			return new LoginStatus(auth.isAuthenticated(), auth.getName(), "success");
-		} catch (BadCredentialsException e) {
-			return new LoginStatus(false, null, "invalid credentials");
 		}
 	}
 

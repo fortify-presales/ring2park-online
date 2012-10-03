@@ -4,13 +4,21 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.NoResultException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +40,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	protected AuthenticationManager authenticationManager;
 
 	// list all of the users - form
 	@Secured("ROLE_ADMIN")
@@ -142,12 +153,92 @@ public class UserController {
 		return "redirect:../users/";
 	}
 
-	// login a user via AJAX
-	@RequestMapping(value = "/login.json", method = RequestMethod.POST, headers="Accept=application/json")
-	public @ResponseBody LoginStatus login(@RequestParam("j_username") String username,
-			@RequestParam("j_password") String password) {
+	// get users login status via AJAX
+	@RequestMapping(value = "loginstatus.json", method = RequestMethod.GET, headers = "Accept=application/json")
+	public @ResponseBody
+	LoginStatus getStatus() {
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		if (auth != null && !auth.getName().equals("anonymousUser")
+				&& auth.isAuthenticated()) {
+			return new LoginStatus(true, auth.getName(), null);
+		} else {
+			return new LoginStatus(false, null, null);
+		}
+	}
 
-		return userService.login(username, password);
+	// login a user via AJAX
+	@RequestMapping(value = "/login.json", method = RequestMethod.POST, headers = "Accept=application/json")
+	public @ResponseBody
+	LoginStatus login(@RequestParam("j_username") String username,
+			@RequestParam("j_password") String password) {
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+				username, password);
+		try {
+			Authentication auth = authenticationManager.authenticate(token);
+			SecurityContextHolder.getContext().setAuthentication(auth);
+			return new LoginStatus(auth.isAuthenticated(), auth.getName(),
+					"success");
+		} catch (BadCredentialsException e) {
+			return new LoginStatus(false, null, "invalid credentials");
+		}
+	}
+
+	// get users login status via AJAX
+	@RequestMapping(value = "/loginstatus.json", method = RequestMethod.GET, headers = "Accept=application/json")
+	public @ResponseBody
+	LoginStatus getLoginStatus() {
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		if (auth != null && !auth.getName().equals("anonymousUser")
+				&& auth.isAuthenticated()) {
+			return new LoginStatus(true, auth.getName(), null);
+		} else {
+			return new LoginStatus(false, null, null);
+		}
+	}
+
+	// logout a user via AJAX
+	@RequestMapping(value = "/logout.json", method = RequestMethod.POST, headers = "Accept=application/json")
+	public @ResponseBody
+	LoginStatus logout(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			Authentication auth = SecurityContextHolder.getContext()
+					.getAuthentication();
+			if (auth != null) {
+				new SecurityContextLogoutHandler().logout(request, response,
+						auth);
+				new PersistentTokenBasedRememberMeServices().logout(request,
+						response, auth);
+			}
+			return new LoginStatus(false, null, null);
+		} catch (Exception e) {
+			return new LoginStatus(false, null, "unable to logout");
+		}
+	}
+	
+	// view a specific user - form via AJAX
+	@RequestMapping(value = "/view.json", method = RequestMethod.GET, headers="Accept=application/json")
+	public @ResponseBody
+	User view(HttpServletRequest request, HttpServletResponse response) {
+		User user = new User();
+		/*try {
+			//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			//if (auth != null) {
+				String username = SecurityContextHolder.getContext().getAuthentication().getName();
+				System.out.println("username = " + username);
+				if (username != null) {
+					try {
+						user = userService.findUserByUsername(username);
+					} catch (NoResultException e) {
+						//
+					}
+				}
+			//}
+		} catch (Exception e) {
+			//
+		}*/
+		return user;
 	}
 
 }
