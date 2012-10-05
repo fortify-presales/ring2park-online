@@ -20,11 +20,11 @@
 		</property>
 	</bean>
 	
-	<!-- Secures any automatically imported users (via import.sql) -->
+	<!-- Secures any automatically imported users (via import.sql) 
 	<bean class="com.dps.ring2park.security.DatabasePasswordSecurerBean"
 			init-method="secureDatabase" depends-on="dataSource">
 		<property name="dataSource" ref="dataSource"/>
-	</bean>
+	</bean-->
 
 	<!-- Creates an in-memory HSQLDB development database -->
 	<!-- jdbc:embedded-database id="devDataSource"/-->
