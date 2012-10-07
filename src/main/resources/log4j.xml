@@ -12,53 +12,53 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.ring2park.online">
-		<level value="WARN" />
+		<level value="ERROR" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
-		<level value="WARN" />
+		<level value="ERROR" />
 	</logger>
 	
 	<logger name="org.springframework.beans">
-		<level value="WARN" />
+		<level value="ERROR" />
 	</logger>
 	
 	<logger name="org.springframework.context">
-		<level value="WARN" />
+		<level value="ERROR" />
 	</logger>
 
 	<logger name="org.springframework.transaction">
-		<level value="WARN" />
+		<level value="ERROR" />
 	</logger>
 
 	<logger name="org.springframework.jdbc">
-		<level value="WARN" />
+		<level value="ERROR" />
 	</logger>
 
 	<logger name="org.springframework.orm">
-		<level value="WARN" />
+		<level value="ERROR" />
 	</logger>
 
 	<logger name="org.springframework.web">
-		<level value="WARN" />
+		<level value="ERROR" />
 	</logger>
 
 	<logger name="org.springframework.integration">
-		<level value="WARN" />
+		<level value="ERROR" />
 	</logger>
 	
 	<logger name="org.springframework.security">
-		<level value="WARN" />
+		<level value="ERROR" />
 	</logger>
 
 	<logger name="org.springframework.webflow">
-		<level value="WARN" />
+		<level value="ERROR" />
 	</logger>
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="WARN" />
+		<priority value="ERROR" />
 		<appender-ref ref="console" />
 	</root>
 	
