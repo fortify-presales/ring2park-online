@@ -3,6 +3,7 @@ package com.dps.ring2park.service;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dps.ring2park.domain.User;
@@ -116,6 +117,20 @@ public interface UserService {
      * @param user the User
      */
     public void authenticateUser(User user);
+    
+    /**
+     * Check if the currently logged in user has the specified role
+     * @param role the role to check
+     * @returns true if user has the role else false
+     */
+    public boolean hasRole(String role);
+    
+	/**
+	 * Get info about currently logged in user
+	 * @return UserDetails if found in the context, null otherwise
+	 */
+	public UserDetails getUserDetails();
+
 
 }
 

@@ -1,5 +1,6 @@
 package com.dps.ring2park.service.impl;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +15,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.dps.ring2park.dao.RoleDao;
@@ -189,6 +192,50 @@ public class UserServiceImpl implements UserService {
 			// log the message and go on
 			System.err.println(e.getMessage());
 		}
+	}
+
+	public boolean hasRole(String role) {
+		boolean hasRole = false;
+		UserDetails userDetails = getUserDetails();
+		if (userDetails != null) {
+			Collection<? extends GrantedAuthority> authorities = userDetails
+					.getAuthorities();
+			if (isRolePresent(authorities, role)) {
+				hasRole = true;
+			}
+		}
+		return hasRole;
+	}
+
+	public UserDetails getUserDetails() {
+		Object principal = SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		UserDetails userDetails = null;
+		if (principal instanceof UserDetails) {
+			userDetails = (UserDetails) principal;
+		}
+		return userDetails;
+	}
+
+	/**
+	 * Check if a role is present in the authorities of current user
+	 * 
+	 * @param authorities
+	 *            all authorities assigned to current user
+	 * @param role
+	 *            required authority
+	 * @return true if role is present in list of authorities assigned to
+	 *         current user, false otherwise
+	 */
+	private boolean isRolePresent(
+			Collection<? extends GrantedAuthority> authorities, String role) {
+		boolean isRolePresent = false;
+		for (GrantedAuthority grantedAuthority : authorities) {
+			isRolePresent = grantedAuthority.getAuthority().equals(role);
+			if (isRolePresent)
+				break;
+		}
+		return isRolePresent;
 	}
 
 }

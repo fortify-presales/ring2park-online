@@ -17,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
@@ -43,7 +44,7 @@ public class UserController {
 
 	@Autowired
 	protected AuthenticationManager authenticationManager;
-
+	  
 	// list all of the users - form
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(method = RequestMethod.GET)
@@ -64,16 +65,17 @@ public class UserController {
 			return "users/invalidUser";
 		}
 		model.addAttribute(user);
-		if (SecurityContextHolder.getContext().getAuthentication().getName()
-				.equals(username))
+		
+		// only allow user to be edited if it their account or logged as admin
+		UserDetails userDetails = userService.getUserDetails();
+		if (userDetails.getUsername().equals(username) || (userService.hasRole("ROLE_ADMIN")))
 			editable = true;
-		Collection<GrantedAuthority> authorities = SecurityContextHolder
-				.getContext().getAuthentication().getAuthorities();
+		/*Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
 		for (GrantedAuthority grantedAuthority : authorities) {
 			if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
 				editable = true;
 			}
-		}
+		}*/
 		model.addAttribute("editable", editable);
 		return "users/view";
 	}
@@ -181,20 +183,6 @@ public class UserController {
 					"success");
 		} catch (BadCredentialsException e) {
 			return new LoginStatus(false, null, "invalid credentials");
-		}
-	}
-
-	// get users login status via AJAX
-	@RequestMapping(value = "/loginstatus.json", method = RequestMethod.GET, headers = "Accept=application/json")
-	public @ResponseBody
-	LoginStatus getLoginStatus() {
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		if (auth != null && !auth.getName().equals("anonymousUser")
-				&& auth.isAuthenticated()) {
-			return new LoginStatus(true, auth.getName(), null);
-		} else {
-			return new LoginStatus(false, null, null);
 		}
 	}
 

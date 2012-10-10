@@ -6,15 +6,14 @@
 	<artifactId>ring2park</artifactId>
 	<name>ring2park-online</name>
 	<packaging>war</packaging>
-	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<version>1.0.2-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.springframework-version>3.0.6.RELEASE</org.springframework-version>
-		<org.springwebflow-version>2.3.0.RELEASE</org.springwebflow-version>
-		<org.springsecurity-version>3.0.5.RELEASE</org.springsecurity-version>
-		<org.springframework.roo-version>1.1.5.RELEASE</org.springframework.roo-version>
-		<org.aspectj-version>1.6.9</org.aspectj-version>
-		<org.slf4j-version>1.6.1</org.slf4j-version>
+		<org.springframework-version>3.1.2.RELEASE</org.springframework-version>
+		<org.springwebflow-version>2.3.1.RELEASE</org.springwebflow-version>
+		<org.springsecurity-version>3.1.3.RELEASE</org.springsecurity-version>
+		<org.aspectj-version>1.7.0</org.aspectj-version>
+		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -88,14 +87,6 @@
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-
-		<!-- Roo -->
-		<dependency>
-			<groupId>org.springframework.roo</groupId>
-			<artifactId>org.springframework.roo.annotations</artifactId>
-			<version>${org.springframework.roo-version}</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<!-- AspectJ -->
@@ -278,29 +269,13 @@
 			<version>${org.springframework-version}</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 	<repositories>
-		<!-- For testing against latest Spring snapshots -->
+		<!-- For Spring Framework -->
 		<repository>
-			<id>org.springframework.maven.snapshot</id>
-			<name>Spring Maven Snapshot Repository</name>
-			<url>http://maven.springframework.org/snapshot</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<!-- For developing against latest Spring milestones -->
-		<repository>
-			<id>org.springframework.maven.milestone</id>
-			<name>Spring Maven Milestone Repository</name>
-			<url>http://maven.springframework.org/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
+			<id>springsource-repo</id>
+			<name>SpringSource Repository</name>
+			<url>http://repo.springsource.org/release</url>
 		</repository>
 		<!-- For Roo -->
 		<repository>
@@ -323,6 +298,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
 				<configuration>
 					<source>${java-version}</source>
 					<target>${java-version}</target>
@@ -331,6 +307,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
 				<configuration>
 					<warName>ring2park-online</warName>
 				</configuration>
@@ -338,6 +315,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.5.1</version>
 				<executions>
 					<execution>
 						<id>install</id>
@@ -384,6 +362,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12.4</version>
 				<configuration>
 					<junitArtifactName>junit:junit</junitArtifactName>
 					<excludes>
@@ -396,7 +375,7 @@
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<version>1.0-beta-1</version>
 			</plugin>
-			<plugin>
+			<!-- plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>hibernate3-maven-plugin</artifactId>
 				<version>2.2</version>
@@ -424,8 +403,8 @@
 						<format>true</format>
 					</componentProperties>
 				</configuration>
-			</plugin>
-			<plugin>
+			</plugin-->
+			<!-- plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<version>2.3</version>
@@ -447,7 +426,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin-->
 		</plugins>
 		<pluginManagement>
 			<plugins>

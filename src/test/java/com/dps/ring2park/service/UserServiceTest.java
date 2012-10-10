@@ -79,7 +79,7 @@ public class UserServiceTest {
 			userService.findUserByUsername(USERNAME);
 			fail("testDeleteUser() should throw EmptyResultDataAccessException");
 		} catch (EmptyResultDataAccessException e) {
-			assertEquals(e.getMessage(), "No entity found for query");
+			assertEquals(e.getMessage(), "No entity found for query; nested exception is javax.persistence.NoResultException: No entity found for query");
 		}
 	}
 
@@ -91,7 +91,7 @@ public class UserServiceTest {
 			userService.findUserByUsername(USERNAME);
 			fail("testDeleteUserByUsername() should throw EmptyResultDataAccessException");
 		} catch (EmptyResultDataAccessException e) {
-			assertEquals(e.getMessage(), "No entity found for query");
+			assertEquals(e.getMessage(), "No entity found for query; nested exception is javax.persistence.NoResultException: No entity found for query");
 		}
 	}
 
