@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>Book Parking</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Book Parking</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Book Parking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=searchString</td>
+	<td>heathrow</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Heathrow Airport</td>
+	<td>Heathrow Airport</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=book</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='▼ ']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=confirmation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=reminder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>GBP26.20</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_confirm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Booking Confirmed</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
