@@ -5,8 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.dps.ring2park.domain.Booking;
-import com.dps.ring2park.domain.PaymentCard;
 import com.dps.ring2park.domain.Location;
+import com.dps.ring2park.domain.News;
+import com.dps.ring2park.domain.PaymentCard;
 import com.dps.ring2park.domain.Role;
 import com.dps.ring2park.domain.User;
 import com.dps.ring2park.domain.Vehicle;
@@ -91,6 +92,13 @@ public class DataSeeder {
 		Role role = new Role();
 		role.setAuthority("ROLE_GUEST");
 		return role;
+	}
+	
+	public static News generateNews() {
+		News news = new News();
+		news.setTitle("New Location...");
+		news.setContent("A new parking location has been added.");
+		return news;
 	}
 	
 }

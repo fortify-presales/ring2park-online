@@ -14,6 +14,10 @@
 		<org.springsecurity-version>3.1.3.RELEASE</org.springsecurity-version>
 		<org.aspectj-version>1.7.0</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<org.log4j-version>1.2.17</org.log4j-version>
+		<org.hsqldb-version>1.8.0.10</org.hsqldb-version>
+		<org.commons-dbcp-version>1.4</org.commons-dbcp-version>
+		<org.mysql-connector-java-version>5.1.21</org.mysql-connector-java-version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -117,7 +121,7 @@
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
+			<version>${org.log4j-version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.mail</groupId>
@@ -150,18 +154,18 @@
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
-			<version>1.8.0.10</version>
+			<version>${org.hsqldb-version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
-			<version>1.2.2</version>
+			<version>${org.commons-dbcp-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.9</version>
+			<version>${org.mysql-connector-java-version}</version>
 		</dependency>
 
 		<!-- Servlet -->
@@ -269,7 +273,31 @@
 			<version>${org.springframework-version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>2.28.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-htmlunit-driver</artifactId>
+		</dependency>
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-htmlunit-driver</artifactId>
+				<version>2.28.0</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.seleniumhq.selenium</groupId>
+						<artifactId>selenium-remote-driver</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<repositories>
 		<!-- For Spring Framework -->
 		<repository>
@@ -375,58 +403,21 @@
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<version>1.0-beta-1</version>
 			</plugin>
-			<!-- plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>hibernate3-maven-plugin</artifactId>
-				<version>2.2</version>
-				<executions>
-					<execution>
-						<phase>process-classes</phase>
-						<goals>
-							<goal>hbm2ddl</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<components>
-						<component>
-							<name>hbm2ddl</name>
-							<implementation>jpaconfiguration</implementation>
-						</component>
-					</components>
-					<componentProperties>
-						<persistenceunit>ring2parkDatabase</persistenceunit>
-						<outputfilename>schema.sql</outputfilename>
-						<drop>false</drop>
-						<create>true</create>
-						<export>false</export>
-						<format>true</format>
-					</componentProperties>
-				</configuration>
-			</plugin-->
-			<!-- plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.3</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>org.mortbay.jetty</groupId>
-									<artifactId>jetty-runner</artifactId>
-									<version>7.4.5.v20110725</version>
-									<destFileName>jetty-runner.jar</destFileName>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin-->
+			<!-- plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>hibernate3-maven-plugin</artifactId> 
+				<version>2.2</version> <executions> <execution> <phase>process-classes</phase> 
+				<goals> <goal>hbm2ddl</goal> </goals> </execution> </executions> <configuration> 
+				<components> <component> <name>hbm2ddl</name> <implementation>jpaconfiguration</implementation> 
+				</component> </components> <componentProperties> <persistenceunit>ring2parkDatabase</persistenceunit> 
+				<outputfilename>schema.sql</outputfilename> <drop>false</drop> <create>true</create> 
+				<export>false</export> <format>true</format> </componentProperties> </configuration> 
+				</plugin -->
+			<!-- plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
+				<version>2.3</version> <executions> <execution> <phase>package</phase> <goals> 
+				<goal>copy</goal> </goals> <configuration> <artifactItems> <artifactItem> 
+				<groupId>org.mortbay.jetty</groupId> <artifactId>jetty-runner</artifactId> 
+				<version>7.4.5.v20110725</version> <destFileName>jetty-runner.jar</destFileName> 
+				</artifactItem> </artifactItems> </configuration> </execution> </executions> 
+				</plugin -->
 		</plugins>
 		<pluginManagement>
 			<plugins>
