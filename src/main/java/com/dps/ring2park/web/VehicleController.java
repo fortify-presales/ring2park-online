@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dps.ring2park.domain.Vehicle;
 import com.dps.ring2park.service.VehicleService;
@@ -137,6 +138,20 @@ public class VehicleController {
 		String message = "Succesfully deleted vehicle.";
 		FlashMap.setSuccessMessage(message);
 		return "redirect:../vehicles/";
+	}
+	
+	// find a users vehicles - via AJAX
+	@RequestMapping(value = "{username}/view.json", method = RequestMethod.GET, headers="Accept=application/json")
+	public @ResponseBody List<Vehicle> view(@PathVariable String username) {
+		List<Vehicle> vehicles = vehicleService.findVehicles(username);
+		return vehicles;
+	}
+	
+	// find specific vehicle - via AJAX
+	@RequestMapping(value = "{id}/details.json", method = RequestMethod.GET, headers="Accept=application/json")
+	public @ResponseBody Vehicle details(@PathVariable Long id) {
+		Vehicle vehicle = vehicleService.findVehicleById(id);
+		return vehicle;
 	}
 
 }

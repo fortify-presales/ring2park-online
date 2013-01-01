@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dps.ring2park.domain.PaymentCard;
 import com.dps.ring2park.service.PaymentCardService;
@@ -129,6 +130,20 @@ public class PaymentCardController {
 		String message = "Succesfully deleted Payment Card.";
 		FlashMap.setSuccessMessage(message);
 		return "redirect:../cards/";
+	}
+	
+	// find a users payment cards - via AJAX
+	@RequestMapping(value = "{username}/view.json", method = RequestMethod.GET, headers="Accept=application/json")
+	public @ResponseBody List<PaymentCard> view(@PathVariable String username) {
+		List<PaymentCard> cards = paymentCardService.findPaymentCards(username);
+		return cards;
+	}
+	
+	// find specific payment card - via AJAX
+	@RequestMapping(value = "{id}/details.json", method = RequestMethod.GET, headers="Accept=application/json")
+	public @ResponseBody PaymentCard details(@PathVariable Long id) {
+		PaymentCard card = paymentCardService.findPaymentCardById(id);
+		return card;
 	}
 
 }

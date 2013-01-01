@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dps.ring2park.domain.Location;
 import com.dps.ring2park.service.BookingService;
@@ -49,6 +51,20 @@ public class LocationsController {
 	public String details(@PathVariable Long id, Model model) {
 		model.addAttribute(bookingService.findLocationById(id));
 		return "locations/details";
+	}
+	
+	// find locations - via AJAX
+	@RequestMapping(value = "search.json", method = RequestMethod.GET, headers="Accept=application/json")
+	public @ResponseBody List<Location> search(@RequestParam("criteria") SearchCriteria criteria) {
+		List<Location> locations = bookingService.findLocations(criteria);
+		return locations;
+	}
+	
+	// find specific location - via AJAX
+	@RequestMapping(value = "{id}/details.json", method = RequestMethod.GET, headers="Accept=application/json")
+	public @ResponseBody Location details(@PathVariable Long id) {
+		Location location = bookingService.findLocationById(id);
+		return location;
 	}
 
 }

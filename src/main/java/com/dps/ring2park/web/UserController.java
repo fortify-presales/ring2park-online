@@ -1,6 +1,5 @@
 package com.dps.ring2park.web;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -15,7 +14,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -155,6 +153,8 @@ public class UserController {
 		return "redirect:../users/";
 	}
 
+	// AJAX URIs
+	
 	// get users login status via AJAX
 	@RequestMapping(value = "loginstatus.json", method = RequestMethod.GET, headers = "Accept=application/json")
 	public @ResponseBody
@@ -205,16 +205,13 @@ public class UserController {
 		}
 	}
 	
-	// view a specific user - form via AJAX
-	@RequestMapping(value = "/view.json", method = RequestMethod.GET, headers="Accept=application/json")
-	public @ResponseBody
-	User view(HttpServletRequest request, HttpServletResponse response) {
+	// view a specific user - via AJAX
+	@RequestMapping(value = "/{username}/view.json", method = RequestMethod.GET, headers="Accept=application/json")
+	public @ResponseBody User view(@PathVariable String username) {
 		User user = new User();
-		/*try {
-			//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			//if (auth != null) {
-				String username = SecurityContextHolder.getContext().getAuthentication().getName();
-				System.out.println("username = " + username);
+		try {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			if (auth != null) {
 				if (username != null) {
 					try {
 						user = userService.findUserByUsername(username);
@@ -222,11 +219,39 @@ public class UserController {
 						//
 					}
 				}
-			//}
+			}
 		} catch (Exception e) {
 			//
-		}*/
+		}
 		return user;
 	}
+	
+	// edit a specific user - via AJAX
+	@RequestMapping(value = "/{username}/edit.json", method = RequestMethod.POST, headers="Accept=application/json")
+	public @ResponseBody User edit(@PathVariable String username, @RequestParam("name") String name,
+			@RequestParam("email") String email, @RequestParam("password") String password) {
+		User user = new User();
+		try {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			if (auth != null) {
+				if (username != null) {
+					try {
+						user = userService.findUserByUsername(username);
+						// update user
+						user.setName(name);
+						user.setEmail(email);
+						user.setPassword(password);
+						user = userService.updateUser(user);
+					} catch (NoResultException e) {
+						//
+					}
+				}
+			}
+		} catch (Exception e) {
+			//
+		}
+		return user;
+	}
+
 
 }
