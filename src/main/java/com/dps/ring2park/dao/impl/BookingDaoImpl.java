@@ -26,8 +26,8 @@ public class BookingDaoImpl extends GenericDAOImpl<Booking, Long> implements Boo
 		CriteriaQuery<Booking> criteriaQuery = criteriaBuilder.createQuery(Booking.class);
 		Root<Booking> from = criteriaQuery.from(Booking.class);
 		Path<Object> path = from.join("user").get("username");
-		CriteriaQuery<Booking> select = criteriaQuery.select(from);   
-		select.where(criteriaBuilder.equal(path, username));	
+		CriteriaQuery<Booking> select = criteriaQuery.select(from).orderBy(criteriaBuilder.desc(from.get("startDate")));   
+		select.where(criteriaBuilder.equal(path, username));
 		return (List<Booking>) super.entityManager.createQuery(select).getResultList();
 	}
 

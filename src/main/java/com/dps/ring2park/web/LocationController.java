@@ -19,12 +19,12 @@ import com.dps.ring2park.web.form.SearchCriteria;
 
 @Controller
 @RequestMapping("/locations/")
-public class LocationsController {
+public class LocationController {
 
 	private BookingService bookingService;
 
 	@Inject
-	public LocationsController(BookingService bookingService) {
+	public LocationController(BookingService bookingService) {
 		this.bookingService = bookingService;
 	}
 
@@ -51,6 +51,13 @@ public class LocationsController {
 	public String details(@PathVariable Long id, Model model) {
 		model.addAttribute(bookingService.findLocationById(id));
 		return "locations/details";
+	}
+
+	// find locations - via AJAX
+	@RequestMapping(value = "find.json", method = RequestMethod.GET, headers="Accept=application/json")
+	public @ResponseBody List<Location> all() {
+		List<Location> locations = bookingService.findAllLocations();
+		return locations;
 	}
 	
 	// find locations - via AJAX

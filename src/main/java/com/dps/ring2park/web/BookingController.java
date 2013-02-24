@@ -24,8 +24,8 @@ import com.dps.ring2park.service.UserService;
 import com.dps.ring2park.service.VehicleService;
 
 @Controller
-@RequestMapping("/statements/*")
-public class StatementsController {
+@RequestMapping("/bookings/*")
+public class BookingController {
 
 	@Autowired
 	private BookingService bookingService;

@@ -38,6 +38,12 @@ public interface BookingService {
     public Booking findBookingById(Long id);
 
     /**
+     * Find all locations available for booking.
+     * @return a list of locations
+     */
+    public List<Location> findAllLocations();
+    
+    /**
      * Find locations available for booking by some criteria.
      * @param criteria the search criteria
      * @return a list of locations meeting the criteria

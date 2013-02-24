@@ -75,6 +75,11 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Transactional(readOnly = true)
+	public List<Location> findAllLocations() {
+		return locationDao.findAll();
+	}
+	
+	@Transactional(readOnly = true)
 	public List<Location> findLocations(SearchCriteria criteria) {
 		return locationDao.findLocations(criteria);
 	}
