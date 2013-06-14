@@ -58,9 +58,9 @@ public class RoleDaoTest {
 	public void testDelete() {
 		Role role = DataSeeder.generateCustomerRole();
 		roleDao.persist(role);
-		assertEquals(3l, roleDao.findAll().size());
+		assertEquals(4l, roleDao.findAll().size());
 		roleDao.remove(role);
-		assertEquals(2l, roleDao.findAll().size());
+		assertEquals(3l, roleDao.findAll().size());
 	}
 
 	@Test
