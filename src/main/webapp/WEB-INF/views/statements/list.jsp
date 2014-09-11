@@ -54,7 +54,13 @@
 		<c:if test="${empty bookingList}">
 			<p>No bookings found.</p>
 		</c:if>
-		
+		<div class="span-24 last prepend-top">
+            <security:authorize access="hasRole('ROLE_USER')">
+                <a class="button" href="<c:url value="/account" />">
+                    <img src="<c:url value="/resources/images/list.png"/>" alt=""/> My Account
+                </a>
+            </security:authorize>
+        </div>
 	</div>
 	
 </security:authorize>

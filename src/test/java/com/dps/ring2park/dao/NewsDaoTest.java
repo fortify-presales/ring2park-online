@@ -66,7 +66,7 @@ public class NewsDaoTest {
 		NewsDao.persist(news);
 		assertEquals(4l, NewsDao.findActive().size());
 		assertEquals(2l, NewsDao.findActiveMax(2).size());
-		News result = NewsDao.findActive().get(0);
+		News result = NewsDao.findActive().get(3);
 		assertEquals("New Location...", result.getTitle());
 		assertEquals("A new parking location has been added.", result.getContent());
 	}

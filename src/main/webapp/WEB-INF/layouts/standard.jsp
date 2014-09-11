@@ -14,20 +14,24 @@
 <spring:url value="/resources/dijit/themes/claro/claro.css" var="claro_url" />
 <spring:url value="/resources/spring/Spring.js" var="spring_url" />
 <spring:url value="/resources/spring/Spring-Dojo.js" var="spring_dojo_url" />
-<spring:url value="/resources/styles/blueprint/" var="blueprint_url" />
+<spring:url value="/resources/styles/blueprint/screen.css" var="blueprint_screen_url" />
+<spring:url value="/resources/styles/blueprint/print.css" var="blueprint_print_url" />
+<spring:url value="/resources/styles/blueprint/plugins/buttons/screen.css" var="blueprint_buttons_screen_url" />
+<spring:url value="/resources/styles/blueprint/plugins/link-icons/screen.css" var="blueprint_link_screen_url" />
+
 <spring:url value="/resources/styles/ring2park.css" var="ring2park_url" />
 <spring:url value="/resources/images/favicon.ico" var="favicon" />
 
 <link rel="stylesheet" type="text/css" href="${claro_url}" />
-<link rel="stylesheet" type="text/css" href="/styles/blueprint/screen.css" 
+<link rel="stylesheet" type="text/css" href="${blueprint_screen_url}"
 	media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="/styles/blueprint/plugins/buttons/screen.css"
+<link rel="stylesheet" type="text/css" href="${blueprint_buttons_screen_url}"
 	media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="/styles/blueprint/plugins/link-icons/screen.css"
+<link rel="stylesheet" type="text/css" href="${blueprint_link_screen_url}"
 	media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="/styles/blueprint/print.css"
+<link rel="stylesheet" type="text/css" href="${blueprint_print_url}"
 	media="print" />
-<link rel="stylesheet" type="text/css" href="/styles/ring2park.css"
+<link rel="stylesheet" type="text/css" href="${ring2park_url}"
 	media="screen, projection" />
 <!--[if lt IE 8]>
 	<link rel="stylesheet" type="text/css" href="${blueprint_url}ie.css" media="screen, projection"/>

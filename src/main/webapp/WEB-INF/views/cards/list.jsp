@@ -17,7 +17,7 @@
 			<div class="span-21 last box">
 				<div class="span-18 last">
 					<spring:url var="cardUrl" value="/cards/{id}">
-						<spring:param name="id" value="${paymentCard.id}"/>
+						<spring:param name="id" value="${paymentcard.id}"/>
 					</spring:url>
 					<span class="">
 						<a class="positive"	href="${cardUrl}">${paymentcard.type}&nbsp;${paymentcard.number}</a> 
@@ -35,6 +35,9 @@
 			<img src="<c:url value="/resources/images/create.png"/>" title="Add Payment Card">
 			Add Payment Card
 		</a>
+        <a class="button" href="<c:url value="/account" />">
+            <img src="<c:url value="/resources/images/list.png"/>" alt=""/> My Account
+        </a>
 	</div>
 	
 </security:authorize>

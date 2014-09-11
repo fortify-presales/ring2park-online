@@ -4,21 +4,21 @@
 
 <h2 class="alt">Terms and Conditions</h2>
 
-<div class="span-24 last">
+<div class="span-22 last">
 
 	<c:forEach items="${flowRequestContext.messageContext.allMessages}"
 		var="message">
-		<c:if test="${message.severity.toString eq 'Info'}">
+		<c:if test="${message.severity eq 'INFO'}">
 			<div class="info">${message.text}</div>
 		</c:if>
-		<c:if test="${message.severity.toString eq 'Error'}">
+		<c:if test="${message.severity eq 'ERROR'}">
 			<div class="error">${message.text}</div>
 		</c:if>
 	</c:forEach>
 
 	<form:form id="registration" modelAttribute="user">
 		<div>
-			<div class="span-21">
+			<div class="span-22">
 				<p>
 					<textarea id="terms" cols="80" rows="8" disabled="disabled"><spring:message code="termsandconditions" htmlEscape="false"/></textarea>
 				</p>

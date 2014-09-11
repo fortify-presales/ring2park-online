@@ -3,7 +3,7 @@
 CREATE TABLE `role` (
   `authority` varchar(40) NOT NULL,
   PRIMARY KEY (`authority`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `mobile` (`mobile`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `user_role` (
   `user_username` varchar(255) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE `user_role` (
   KEY (`roles_authority`),
   CONSTRAINT FOREIGN KEY (`roles_authority`) REFERENCES `role` (`authority`),
   CONSTRAINT FOREIGN KEY (`user_username`) REFERENCES `user` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `location` (
   `location_id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -39,7 +39,7 @@ CREATE TABLE `location` (
   `state` varchar(255) NOT NULL,
   `zip` varchar(255) NOT NULL,
   PRIMARY KEY (`location_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `payment_card` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -57,7 +57,7 @@ CREATE TABLE `payment_card` (
   PRIMARY KEY (`id`),
   KEY (`user`),
   CONSTRAINT FOREIGN KEY (`user`) REFERENCES `user` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `vehicle` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -69,7 +69,7 @@ CREATE TABLE `vehicle` (
   PRIMARY KEY (`id`),
   KEY (`user`),
   CONSTRAINT FOREIGN KEY (`user`) REFERENCES `user` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `booking` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -91,4 +91,14 @@ CREATE TABLE `booking` (
   CONSTRAINT FOREIGN KEY (`location`) REFERENCES `location` (`location_id`),
   CONSTRAINT FOREIGN KEY (`vehicle`) REFERENCES `vehicle` (`id`),
   CONSTRAINT FOREIGN KEY (`card`) REFERENCES `payment_card` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `news` (
+  `news_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `active` bit(1) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY (`news_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

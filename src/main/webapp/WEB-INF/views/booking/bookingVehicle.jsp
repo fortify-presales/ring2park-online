@@ -60,7 +60,7 @@
 			</c:if>		
 			<div>
 				<div class="span-14 last">
-					<p><p>or <a href="/ring2park/vehicles/add">register a new vehicle.</a></p>
+					<p><p>or <a href="/vehicles/add">register a new vehicle.</a></p>
 				</div>
 			</div>			
 			<div class="span-14 last">

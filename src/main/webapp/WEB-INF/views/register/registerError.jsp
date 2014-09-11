@@ -4,14 +4,14 @@
 
 <h2 class="alt">Registration Error</h2>
 
-<div class="span-24 last">
+<div class="span-22 last">
 
 	<c:forEach items="${flowRequestContext.messageContext.allMessages}"
 		var="message">
-		<c:if test="${message.severity.toString eq 'Info'}">
+		<c:if test="${message.severity eq 'INFO'}">
 			<div class="info">${message.text}</div>
 		</c:if>
-		<c:if test="${message.severity.toString eq 'Error'}">
+		<c:if test="${message.severity eq 'ERROR'}">
 			<div class="error">${message.text}</div>
 		</c:if>
 	</c:forEach>

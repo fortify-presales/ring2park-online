@@ -71,7 +71,7 @@
 			</c:if>
 			<div>
 				<div class="span-14 last">
-					<p>or <a href="/ring2park/cards/add">register a new card.</a></p>
+					<p>or <a href="/cards/add">register a new card.</a></p>
 				</div>
 			</div>
 			<div class="span-14 last">

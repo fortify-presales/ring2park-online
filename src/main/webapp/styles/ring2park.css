@@ -170,6 +170,18 @@ thead th {
 }
 
 /*
+ * slideshow
+ */
+#slideshow-desc {
+    text-align: center;
+}
+.hidden-image {
+    display: none;
+}
+.active-image {
+    display: block;
+}
+/*
  * news feed 
  */
 #news-feed   { 

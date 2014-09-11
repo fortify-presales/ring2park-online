@@ -16,6 +16,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
 import org.springframework.binding.validation.ValidationContext;
@@ -48,9 +50,11 @@ public class Booking implements Serializable {
 	@ManyToOne
 	private PaymentCard card;
 
+    @JsonSerialize(using=DateSerializer.class)
 	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date startDate;
 
+    @JsonSerialize(using=DateSerializer.class)
 	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date endDate;
 

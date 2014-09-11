@@ -11,7 +11,7 @@
 
 	<div class="span-24 last">
 		<p>
-			Ring2Park...
+            PLEASE NOTE this is a demonstration application both Digital Parking Solutions and Ring2Park are fictional organisations.
 		</p>
 		<p>
 			Ring2Park is a wholly owner subsidiary of <a href="http://www.digitalparkingsolutions.com">Digital Parking Solutions.</a>

@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,9 +38,11 @@ public class News implements Serializable {
 	@NotEmpty(message = "A news content must be provided.")
 	private String content;
 
+    @JsonSerialize(using=DateSerializer.class)
 	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date startDate;
 
+    @JsonSerialize(using=DateSerializer.class)
 	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date endDate;
 

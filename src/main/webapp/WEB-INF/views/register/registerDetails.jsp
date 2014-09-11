@@ -5,7 +5,7 @@
 
 <h2 class="alt">Enter Details</h2>
 
-<div class="span-24 last">
+<div class="span-22 last">
 
 	<div class="span-22 last">
 		<c:forEach items="${flowRequestContext.messageContext.allMessages}"
@@ -34,7 +34,7 @@
 			<div class="span-6">
 				<label for="name">Username:</label>
 			</div>
-			<div class="span-16 last">
+			<div class="span-15 last">
 				<p>
 					<form:input id="username" path="username" maxlength="40" />
 				</p>
@@ -58,7 +58,7 @@
 			<div class="span-6">
 				<label for="name">Name:</label>
 			</div>
-			<div class="span-16 last">
+			<div class="span-15 last">
 				<p>
 					<form:input id="name" path="name" maxlength="40" />
 				</p>
@@ -82,7 +82,7 @@
 			<div class="span-6">
 				<label for="password">Password:</label>
 			</div>
-			<div class="span-16 last">
+			<div class="span-15 last">
 				<p>
 					<form:input type="password" id="password" path="password"
 						maxlength="40" />
@@ -107,7 +107,7 @@
 			<div class="span-6">
 				<label for="confirmPassword">Confirm Password:</label>
 			</div>
-			<div class="span-16 last">
+			<div class="span-15 last">
 				<p>
 					<form:input type="password" id="confirmPassword"
 						path="confirmPassword" maxlength="40" />
@@ -132,7 +132,7 @@
 			<div class="span-6">
 				<label for="email">Email:</label>
 			</div>
-			<div class="span-16 last">
+			<div class="span-15 last">
 				<p>
 					<form:input id="email" path="email" maxlength="40" />
 				</p>
@@ -156,7 +156,7 @@
 			<div class="span-6">
 				<label for="email">Mobile Number:</label>
 			</div>
-			<div class="span-16 last">
+			<div class="span-15 last">
 				<p>
 					<form:input id="mobile" path="mobile" maxlength="40" />
 				</p>

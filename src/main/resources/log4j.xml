@@ -12,18 +12,18 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.ring2park.online">
-		<level value="ERROR" />
+		<level value="DEBUG" />
 	</logger>
-	
+
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="ERROR" />
 	</logger>
-	
+
 	<logger name="org.springframework.beans">
 		<level value="ERROR" />
 	</logger>
-	
+
 	<logger name="org.springframework.context">
 		<level value="ERROR" />
 	</logger>
@@ -33,7 +33,7 @@
 	</logger>
 
 	<logger name="org.springframework.jdbc">
-		<level value="ERROR" />
+		<level value="DEBUG" />
 	</logger>
 
 	<logger name="org.springframework.orm">
@@ -47,7 +47,7 @@
 	<logger name="org.springframework.integration">
 		<level value="ERROR" />
 	</logger>
-	
+
 	<logger name="org.springframework.security">
 		<level value="ERROR" />
 	</logger>

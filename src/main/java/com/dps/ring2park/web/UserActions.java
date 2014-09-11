@@ -13,13 +13,9 @@ import com.dps.ring2park.service.UserService;
 @Component
 public class UserActions extends MultiAction {
 
+    @Autowired
 	private UserService userService;
-	
-	@Autowired(required=true)
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	} 
-	
+
 	public Event createUser(RequestContext context) {
 		Event event = null;      
       

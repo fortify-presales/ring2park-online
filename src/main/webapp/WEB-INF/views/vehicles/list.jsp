@@ -35,6 +35,9 @@
 			<img src="<c:url value="/resources/images/create.png"/>" title="Add Vehicle">
 			Add Vehicle
 		</a>
+       <a class="button" href="<c:url value="/account" />">
+            <img src="<c:url value="/resources/images/list.png"/>" alt=""/> My Account
+        </a>
 	</div>
 	
 </security:authorize>

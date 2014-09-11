@@ -77,7 +77,7 @@
 							<img src="<c:url value="/resources/images/delete.png"/>" alt=""/> Delete
 						</a>						
 						<a class="button" href="<c:url value="/users/" />">
-							<img src="<c:url value="/resources/images/list.png"/>" alt=""/> Back
+							<img src="<c:url value="/resources/images/list.png"/>" alt=""/> My Account
 						</a>
 					</security:authorize>
 				</div>
