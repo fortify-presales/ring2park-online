@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.dps.ring2park.web.helpers.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dps.ring2park.domain.User;
 import com.dps.ring2park.security.LoginStatus;
 import com.dps.ring2park.service.UserService;
-import com.dps.ring2park.web.extensions.FlashMap;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Secured("ROLE_USER")
@@ -120,36 +121,42 @@ public class UserController {
 	@PreAuthorize("#user.username == authentication.name or hasRole('ROLE_ADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
 	public String update(@Valid User user, BindingResult bindingResult,
-			Model model) {
+			Model model,
+            final RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "users/edit";
 		}
 		userService.updateUser(user);
-		String message = "Succesfully updated user " + user.getUsername() + ".";
-		FlashMap.setSuccessMessage(message);
-		return "redirect:/users/" + user.getUsername();
+		String message = "Successfully updated user " + user.getUsername() + ".";
+        redirectAttributes.addFlashAttribute(String.valueOf(Message.SUCCESS), message);
+
+        return "redirect:/users/" + user.getUsername();
 	}
 
 	// add a user
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(method = RequestMethod.PUT)
-	public String add(@Valid User user, BindingResult bindingResult, Model model) {
+	public String add(@Valid User user, BindingResult bindingResult, Model model,
+                      final RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "users/add";
 		}
 		userService.addUser(user);
-		String message = "Succesfully added user " + user.getUsername() + ".";
-		FlashMap.setSuccessMessage(message);
+		String message = "Successfully added user " + user.getUsername() + ".";
+        redirectAttributes.addFlashAttribute(String.valueOf(Message.SUCCESS), message);
+
 		return "redirect:/users/" + user.getUsername();
 	}
 
 	// delete a user
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "{username}", method = RequestMethod.DELETE)
-	public String delete(@PathVariable String username, Model model) {
+	public String delete(@PathVariable String username, Model model,
+                         final RedirectAttributes redirectAttributes) {
 		userService.deleteUserByUsername(username);
-		String message = "Succesfully deleted user " + username + ".";
-		FlashMap.setSuccessMessage(message);
+		String message = "Successfully deleted user " + username + ".";
+        redirectAttributes.addFlashAttribute(String.valueOf(Message.SUCCESS), message);
+
 		return "redirect:../users/";
 	}
 

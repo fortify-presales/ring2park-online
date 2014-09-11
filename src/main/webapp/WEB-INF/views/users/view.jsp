@@ -6,10 +6,13 @@
 <security:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
 
 	<h2 class="alt">Account Details</h2>
-	
-	<c:if test="${not empty message}">
-		<div id="message" class="span-21 last ${message.type}">${message.text}</div>	
-	</c:if>
+
+    <c:if test="${not empty success}">
+        <div id="message" class="success">${success}</div>
+    </c:if>
+    <c:if test="${not empty error}">
+        <div id="message" class="error">${error}</div>
+    </c:if>
 	
 	<c:if test="${not empty user}">
 		<div class="span-24 last">		
@@ -97,7 +100,7 @@
 dojo.style("message", "opacity", "0");
 var fadeArgs = {
 	node: "message",
-    duration: 500,
+    duration: 500
 };
 dojo.fadeIn(fadeArgs).play();
 //-->

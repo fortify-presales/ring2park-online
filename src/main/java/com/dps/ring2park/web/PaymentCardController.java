@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.validation.Valid;
 
+import com.dps.ring2park.web.helpers.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dps.ring2park.domain.PaymentCard;
 import com.dps.ring2park.service.PaymentCardService;
-import com.dps.ring2park.web.extensions.FlashMap;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/cards/*")
@@ -91,22 +92,24 @@ public class PaymentCardController {
 
 	// update a paymentCard
 	@RequestMapping(method = RequestMethod.POST)
-	public String update(@Valid PaymentCard paymentCard, BindingResult bindingResult, Model model) {
+	public String update(@Valid PaymentCard paymentCard, BindingResult bindingResult, Model model,
+                         final RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			List<String> types = paymentCardService.getTypes();
 			model.addAttribute("typeList", types);
 			return "cards/edit";
 		}
 		paymentCardService.updatePaymentCard(paymentCard);
-		String message = "Succesfully updated Payment Card " + paymentCard.getNumber() + ".";
-		FlashMap.setSuccessMessage(message);
+		String message = "Successfully updated Payment Card " + paymentCard.getNumber() + ".";
+        redirectAttributes.addFlashAttribute(String.valueOf(Message.SUCCESS), message);
 		return "redirect:/cards/" + paymentCard.getId();
 	}
 
 	// add a paymentCard
 	@RequestMapping(method = RequestMethod.PUT)
 	public String add(@Valid PaymentCard paymentCard, BindingResult bindingResult,
-			Principal currentUser, Model model) {
+			Principal currentUser, Model model,
+            final RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			List<String> types = paymentCardService.getTypes();
 			model.addAttribute("typeList", types);
@@ -114,8 +117,8 @@ public class PaymentCardController {
 		}
 		if (currentUser != null) {
 			paymentCardService.addPaymentCard(paymentCard, currentUser.getName());
-			String message = "Succesfully added Payment Card " + paymentCard.getNumber() + ".";
-			FlashMap.setSuccessMessage(message);
+			String message = "Successfully added Payment Card " + paymentCard.getNumber() + ".";
+            redirectAttributes.addFlashAttribute(String.valueOf(Message.SUCCESS), message);
 			return "redirect:/cards/" + paymentCard.getId();
 		} else {
 			// TODO: return error
@@ -125,10 +128,11 @@ public class PaymentCardController {
 
 	// delete a paymentCard
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-	public String delete(@PathVariable Long id, Model model) {
+	public String delete(@PathVariable Long id, Model model,
+                         final RedirectAttributes redirectAttributes) {
 		paymentCardService.deletePaymentCardById(id);
-		String message = "Succesfully deleted Payment Card.";
-		FlashMap.setSuccessMessage(message);
+		String message = "Successfully deleted Payment Card.";
+        redirectAttributes.addFlashAttribute(String.valueOf(Message.SUCCESS), message);
 		return "redirect:../cards/";
 	}
 	

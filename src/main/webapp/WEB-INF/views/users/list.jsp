@@ -7,9 +7,12 @@
 
 	<h2 class="alt">User Accounts</h2>
 
-	<c:if test="${not empty message}">
-		<div id="message" class="span-21 last ${message.type}">${message.text}</div>	
-	</c:if>
+    <c:if test="${not empty success}">
+        <div id="message" class="success">${success}</div>
+    </c:if>
+    <c:if test="${not empty error}">
+        <div id="message" class="error">${error}</div>
+    </c:if>
 	
 	<div class="span-24 last">	
 		<c:if test="${not empty userList}">
