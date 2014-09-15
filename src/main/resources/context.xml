@@ -1,0 +1,6 @@
+<!--
+  Context fragment for deploying ring2park-online.war
+ -->
+<Context path="/ring2park" docBase="webapps/ring2park-online.war"
+         debug="0" privileged="true">
+</Context>

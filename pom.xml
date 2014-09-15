@@ -423,40 +423,48 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.codehaus.mojo
-										</groupId>
-										<artifactId>
-											hibernate3-maven-plugin
-										</artifactId>
-										<versionRange>
-											[2.2,)
-										</versionRange>
-										<goals>
-											<goal>hbm2ddl</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                    <executions>
+                        <execution>
+                            <id>copy-resources</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${basedir}/target/</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>src/main/resources/</directory>
+                                        <includes>
+                                            <include>environment.properties</include>
+                                            <include>context.xml</include>
+                                            <include>README</include>
+                                        </includes>
+                                        <filtering>true</filtering>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
 	<url>https://github.com/akevinlee/ring2park-online</url>
+    <description>Ring2Park Online - Customer Portal for Booking Parking Sessions and managing a Users Account.</description>
+    <organization>
+        <name>Digital Parking Solutions</name>
+        <url>www.digitalparkingsolutions.com</url>
+    </organization>
+    <ciManagement>
+        <system>Jenkins</system>
+        <url>http://devopsme.srnademo.com:9090/</url>
+    </ciManagement>
+    <scm>
+        <url>https://github.com/akevinlee/ring2park-online</url>
+        <developerConnection>akevinlee</developerConnection>
+    </scm>
 </project>
