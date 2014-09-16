@@ -3,11 +3,7 @@ package com.dps.ring2park.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -19,6 +15,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
  * @author Kevin A. Lee
  */
 @Entity
+@Table(name = "LOCATION")
 public class Location implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

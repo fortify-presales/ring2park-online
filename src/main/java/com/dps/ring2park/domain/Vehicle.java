@@ -2,11 +2,7 @@ package com.dps.ring2park.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -17,6 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author Kevin A. Lee
  */
 @Entity
+@Table(name = "VEHICLE")
 public class Vehicle implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

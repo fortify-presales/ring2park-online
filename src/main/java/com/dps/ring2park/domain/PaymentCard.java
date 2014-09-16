@@ -2,20 +2,14 @@ package com.dps.ring2park.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 /**
  * A Payment Card belonging to a User.
  * @author Kevin A. Lee
  */
 @Entity
+@Table(name = "PAYMENT_CARD")
 public class PaymentCard implements Serializable {
 
 	private static final long serialVersionUID = 1L;

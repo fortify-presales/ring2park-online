@@ -4,14 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
@@ -23,6 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author Kevin A. Lee
  */
 @Entity
+@Table(name = "NEWS")
 public class News implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

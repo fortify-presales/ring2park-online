@@ -6,15 +6,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
@@ -30,6 +22,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
  * @author Kevin A. Lee
  */
 @Entity
+@Table(name = "BOOKING")
 public class Booking implements Serializable {
 
 	private static final long serialVersionUID = 1L;
