@@ -22,7 +22,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
  * @author Kevin A. Lee
  */
 @Entity
-@Table(name = "BOOKING")
+@Table(name = "booking")
 public class Booking implements Serializable {
 
 	private static final long serialVersionUID = 1L;

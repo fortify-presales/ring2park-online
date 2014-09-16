@@ -16,7 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author Kevin A. Lee
  */
 @Entity
-@Table(name = "NEWS")
+@Table(name = "news")
 public class News implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

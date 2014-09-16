@@ -9,7 +9,7 @@ import javax.persistence.*;
  * @author Kevin A. Lee
  */
 @Entity
-@Table(name = "PAYMENT_CARD")
+@Table(name = "payment_card")
 public class PaymentCard implements Serializable {
 
 	private static final long serialVersionUID = 1L;

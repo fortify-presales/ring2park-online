@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.Email;
  * @author Kevin A. Lee
  */
 @Entity
-@Table(name = "USER")
+@Table(name = "user")
 public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

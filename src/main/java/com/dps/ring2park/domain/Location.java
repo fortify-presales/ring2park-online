@@ -15,7 +15,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
  * @author Kevin A. Lee
  */
 @Entity
-@Table(name = "LOCATION")
+@Table(name = "location")
 public class Location implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

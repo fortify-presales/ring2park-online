@@ -22,7 +22,7 @@
 	</authentication-manager>
 
 	<jdbc-user-service id="jdbcUserService" data-source-ref="dataSource"
-		users-by-username-query="select username, password, enabled from USER where username = ?"
-		authorities-by-username-query="select user_username, roles_authority from USER_ROLE where user_username = ?" />
+		users-by-username-query="select username, password, enabled from user where username = ?"
+		authorities-by-username-query="select user_username, roles_authority from user_role where user_username = ?" />
 
 </beans:beans>

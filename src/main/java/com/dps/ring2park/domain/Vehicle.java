@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author Kevin A. Lee
  */
 @Entity
-@Table(name = "VEHICLE")
+@Table(name = "vehicle")
 public class Vehicle implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
