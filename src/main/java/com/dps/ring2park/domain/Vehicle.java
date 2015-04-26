@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -17,7 +18,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Vehicle implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
+
+	public interface WithoutUserView {};
+	public interface WithUserView extends WithoutUserView {};
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -54,7 +58,12 @@ public class Vehicle implements Serializable {
 		this.id = id;
 	}
 
-	
+	@JsonView(WithoutUserView.class)
+	public String getUsername() {
+		return user.getUsername();
+	}
+
+	@JsonView(WithUserView.class)
 	public User getUser() {
 		return user;
 	}

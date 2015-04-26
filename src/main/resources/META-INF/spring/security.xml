@@ -9,7 +9,8 @@
 		<form-login login-page="/login" login-processing-url="/login/authenticate"
 			default-target-url="/account" authentication-failure-url="/login?login_error=1" />
 		<logout logout-url="/logout" logout-success-url="/" />
-		<access-denied-handler error-page="/accessDenied"/>		
+		<access-denied-handler error-page="/accessDenied"/>
+		<http-basic />
 	</http>
 
 	<beans:bean id="passwordEncoder"

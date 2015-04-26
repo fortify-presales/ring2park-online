@@ -8,6 +8,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import org.springframework.binding.message.MessageBuilder;
@@ -26,6 +27,9 @@ import org.springframework.format.annotation.NumberFormat.Style;
 public class Booking implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	public interface WithoutUserView {};
+	public interface WithUserView extends WithoutUserView {};
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -150,6 +154,12 @@ public class Booking implements Serializable {
 		this.card = card;
 	}
 
+	@JsonView(WithoutUserView.class)
+	public String getUsername() {
+		return user.getUsername();
+	}
+
+	@JsonView(WithUserView.class)
 	public User getUser() {
 		return user;
 	}
