@@ -6,7 +6,7 @@
 	<artifactId>ring2park-online</artifactId>
 	<name>ring2park-online</name>
 	<packaging>war</packaging>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
 		<org.springframework-version>4.1.0.RELEASE</org.springframework-version>
