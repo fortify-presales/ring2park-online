@@ -12,3 +12,5 @@ To get up and running:
 	- build the application using maven (mvn package) and install the resultant WAR file in your container
 
 Kevin A. Lee
+
+Updated
