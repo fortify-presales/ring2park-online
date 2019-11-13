@@ -18,7 +18,7 @@
 		<org.hsqldb-version>2.3.2</org.hsqldb-version>
 		<org.commons-dbcp-version>1.4</org.commons-dbcp-version>
 		<org.mysql-connector-java-version>5.1.32</org.mysql-connector-java-version>
-        <jackson.databind-version>2.4.2</jackson.databind-version>
+        <jackson.databind-version>2.10.1</jackson.databind-version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
