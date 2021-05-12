@@ -11,7 +11,7 @@
 		<java-version>1.6</java-version>
 		<org.springframework-version>4.1.0.RELEASE</org.springframework-version>
 		<org.springwebflow-version>2.4.0.RELEASE</org.springwebflow-version>
-		<org.springsecurity-version>3.2.5.RELEASE</org.springsecurity-version>
+		<org.springsecurity-version>5.2.10.RELEASE</org.springsecurity-version>
 		<org.aspectj-version>1.8.2</org.aspectj-version>
 		<org.slf4j-version>1.7.7</org.slf4j-version>
 		<org.log4j-version>1.2.17</org.log4j-version>
